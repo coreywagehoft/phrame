@@ -70,6 +70,7 @@ export const schema = z
     openai: z
       .object({
         key: z.string(),
+        basePath: z.string(),
         summary: z
           .object({
             model: z.string(),

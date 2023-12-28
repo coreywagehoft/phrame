@@ -4,12 +4,13 @@ import AI, { Random, LogError } from './ai';
 import config from '../config';
 
 const {
-  OPENAI: { KEY, SUMMARY, IMAGE },
+  OPENAI: { KEY, BASEPATH, SUMMARY, IMAGE },
 } = config();
 
 const openai = new OpenAIApi(
   new Configuration({
     apiKey: KEY,
+    basePath: BASEPATH,
   })
 );
 
