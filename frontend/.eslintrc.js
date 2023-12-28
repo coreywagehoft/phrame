@@ -10,7 +10,6 @@ module.exports = {
     'eslint:recommended',
     'airbnb-base',
     'airbnb-typescript/base',
-    '@vue/eslint-config-typescript/recommended',
     '@vue/eslint-config-prettier',
   ],
   parserOptions: {
