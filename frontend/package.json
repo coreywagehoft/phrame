@@ -5,7 +5,7 @@
     "dev": "vite",
     "build-dev": "run-p type-check build-only-dev",
     "build-qa": "run-p type-check build-only-qa",
-    "build": "run-p type-check build-only",
+    "build": "run-p build-only",
     "build-only-dev": "vite build --mode development",
     "build-only-qa": "vite build --mode qa",
     "build-only": "vite build",
