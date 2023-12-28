@@ -26,12 +26,12 @@ jobs:
         if: ${{ github.event.release.target_commitish == 'beta' || (github.event_name == 'workflow_dispatch' && github.ref_name == 'beta') }}
         run: |
           echo "ARCH=linux/amd64" >> $GITHUB_ENV
-          echo "TAGS=coreywagehoft/phrame:beta" >> $GITHUB_ENV
+          echo "TAGS=ghcr.io/coreywagehoft/phrame:beta" >> $GITHUB_ENV
       - name: Set ENV to latest
         if: ${{ github.event.release.target_commitish == 'master' || (github.event_name == 'workflow_dispatch' && github.ref_name == 'master') }}
         run: |
           echo "ARCH=linux/amd64" >> $GITHUB_ENV
-          echo "TAGS=coreywagehoft/phrame:latest,coreywagehoft/phrame:${{steps.version.outputs.prop}}" >> $GITHUB_ENV
+          echo "TAGS=ghcr.io/coreywagehoft/phrame:latest,ghcr.io/coreywagehoft/phrame:${{steps.version.outputs.prop}}" >> $GITHUB_ENV
       - name: Version with SHA-7
         run: |
           npm version ${{steps.version.outputs.prop}}-$(echo ${GITHUB_SHA} | cut -c1-7) --no-git-tag-version
@@ -43,7 +43,7 @@ jobs:
         id: buildx
         uses: docker/setup-buildx-action@v2
         with:
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
       - name: Cache Docker layers
         uses: actions/cache@v2
         with:
@@ -65,6 +65,7 @@ jobs:
           builder: ${{ steps.buildx.outputs.name }}
           platforms: ${{env.ARCH}}
           push: true
+          provenance: false
           tags: ${{env.TAGS}}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new
